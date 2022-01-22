@@ -4,7 +4,7 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "home/vdwti/HPC_21_22/Boost"
+                "/usr/include"
 
             ],
             "defines": [

@@ -13,7 +13,7 @@
 				"-o",
 				"${fileDirname}/${fileBasenameNoExtension}",
 				"&&",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}/${fileBasenameNoExtension}.exe"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
