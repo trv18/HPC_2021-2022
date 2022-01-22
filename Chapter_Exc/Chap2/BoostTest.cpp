@@ -1,15 +1,19 @@
 #include <iostream>
-#include <home/vdwti/HPC_21_22/Boost/program_options.hpp>
+#include <string>
+#include <boost/program_options.hpp>
 namespace po = boost::program_options;
 
 int main(int argc, char* argv[]) {
     po::options_description opts(
     "Available options.");
     opts.add_options()
-    ("start", po::value<int>()->default_value(0),
+    ("start, s", po::value<int>()->default_value(0),
     "Starting value.")
     ("end", po::value<int>()->default_value(10),
-    "Ending value.")
+    "Ending value., e")
+    ("Random", po::value<std::string>() -> default_value("Test"),
+    "Testing input.")
+
     ("help", "Print help message.");
 
     po::variables_map vm;
@@ -21,4 +25,6 @@ int main(int argc, char* argv[]) {
     }
     const int start = vm["start"].as<int>();
     const int end = vm["end"].as<int>();
+
+    std::cout << "Chosen Start Value = " << start << std::endl;
  }
