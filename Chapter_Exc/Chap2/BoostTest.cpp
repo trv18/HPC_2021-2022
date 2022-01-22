@@ -7,10 +7,10 @@ int main(int argc, char* argv[]) {
     po::options_description opts(
     "Available options.");
     opts.add_options()
-    ("start, s", po::value<int>()->default_value(0),
+    ("start,s", po::value<int>()->default_value(0),
     "Starting value.")
-    ("end", po::value<int>()->default_value(10),
-    "Ending value., e")
+    ("end, e", po::value<int>()->default_value(10),
+    "Ending value.")
     ("Random", po::value<std::string>() -> default_value("Test"),
     "Testing input.")
 
