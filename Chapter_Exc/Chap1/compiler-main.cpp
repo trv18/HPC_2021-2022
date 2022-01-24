@@ -19,7 +19,7 @@ int main() {
     cin >> n;
 #else   
     int n = 100000000;
-#endif
+#endif  
 
     if (n == 0) {
         cout << "N must be > 0" << endl;
