@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <array>
-#include <fstream>
 
+#include "Matrix_sum.h"
 #include "boost/program_options.hpp"
 namespace po = boost::program_options;
 
@@ -58,11 +58,22 @@ int main(int argc, char* argv[]){
     double X[N*N];
 
     for (int i=0; i<N*N; i++) {X[i] = ((double) rand() / (RAND_MAX));}
+    std::vector<double> X2(X, X + sizeof X / sizeof X[0]);
+    // for (int i=0; i<N*N; i++) {X2.push_back(((double) rand() / (RAND_MAX)));}
 
     double norm = cblas_dnrm2(N*N, &X[0], 1);
     std::cout << "Norm: " <<norm << std::endl;
     double sum = cblas_dasum(N*N, &X[0], 1);
     std::cout << "Sum: " << sum << std::endl;
+
+    // Initiate Class instance
+    Matrix_sum sum_finder(N*N);
+    std::cout << "Sum through class dot product by pointer:" << sum_finder.Find_BLAS_Sum(&X[0], N*N) << std::endl;
+    std::cout << "Sum through class dot product by reference:" << sum_finder.Find_BLAS_Sum2(X2) << std::endl;
+
+    int ix = 1;
+    int iy = 0;
+    double y = 1.0;
 
     for (int i = 0; i < N; i++){
 
