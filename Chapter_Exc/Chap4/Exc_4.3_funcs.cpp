@@ -26,3 +26,17 @@ void symmetric(std::vector<double> &M,  const int N){
     // // cblas_caxpy(N*N, &alpha ,&Mt, ix, &M, ix);    
 
 }
+
+
+void print_matrix(std::vector<double> &vec, const int N, const int M){
+     for (int i = 0; i < N; i++){
+        for (int j = 0; j < M; j++){
+            // std::cout << M_ref[i][j] << std::endl;
+            std::cout << vec[i*N+j] <<" ";
+        }   
+        std::cout << "\n";
+    }
+    std::cout << "\n";
+
+}
+

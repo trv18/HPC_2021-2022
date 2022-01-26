@@ -29,28 +29,22 @@ int main(){
     std::vector<double> Matr(N*N);
     std::vector<double> X(N,1);
 
-    symmetric(Matr, N);
+    symmetric(Matr, N); 
 
-    //  Print out array
-    for (int i = 0; i < N; i++){
-        for (int j = 0; j < N; j++){
-            // std::cout << M_ref[i][j] << std::endl;
-            std::cout << Matr[i*N+j] <<" ";
-        }   
-        std::cout << "\n";
-    }
-    std::cout << "\n";
+    //  Print out matrix
+    print_matrix(Matr, N, N);
 
+    
     CBLAS_LAYOUT Layout = CblasRowMajor;
-    CBLAS_TRANSPOSE transA = CblasNoTrans;
-    CBLAS_TRANSPOSE transB = CblasTrans;
+    CBLAS_TRANSPOSE transA = CblasTrans;
+    CBLAS_TRANSPOSE transB = CblasNoTrans;
 
     const int M = N;
     const int K = N;
     const double alpha = 1.0;
     const double lda = N;
-    double C[N][N] = {0.0};
-    double y[N] = {0.0};
+    double C[N][N] = {0.0}; // "A" matrix in Algorithm
+    double y[N] = {0.0};    // "b" matrix in Algorithm
     const double icx = 1.0;
     const double icy = 1.0;
 
@@ -58,17 +52,6 @@ int main(){
     // Inputs: ... , ... , ... , Arow, Bcols, Acols, 
     cblas_dgemm(Layout, transA, transB, M, N, K, alpha, &Matr[0], lda,  &Matr[0], lda, 1.0, &C[0][0], lda);
     cblas_dgemv(Layout, transA, M, N, alpha, &Matr[0], lda,  &X[0], icx, 1.0, &y[0], icy);
-    
-    for (int i = 0; i < N; i++){
-        for (int j = 0; j < N; j++){
-            std::cout << Matr[i*N+j] << std::endl;
-        }
-        std::cout << "\n";
-    }
-
-    std::cout << "Correct Value:" << Matr[1*N+0] + Matr[1*N+1] + Matr[1*N+2] << "\n";
-    std::cout << "Y :" << y[1] << "\n";
-
 
 
 
