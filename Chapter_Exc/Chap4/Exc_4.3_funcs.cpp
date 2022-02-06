@@ -46,6 +46,7 @@ void print_matrix(std::vector<double> &vec, const int N, const int M){
   // @param [A]: matrix of coeff
   // @param [b]: vector for right hand side
   // @param [X_k]: Initial guess for solution X
+  // @returns X solution overwritten in X_k
 std::vector<double> Conj_Grad_Method(std::vector<double> &A, std::vector<double> &b, std::vector<double> &X_k)
   
 
