@@ -1,9 +1,9 @@
 #include <vector>
 #include <iterator> // includes begin and end
 #include <iostream> 
-#include <stdlib.h>
+#include <cstdlib>
 #include <time.h>
-#include "cblas.h"
+#include <cblas.h>
 
 
 void symmetric(std::vector<double> &M,  const int N){
@@ -47,13 +47,10 @@ void print_matrix(std::vector<double> &vec, const int N, const int M){
   // @param [b]: vector for right hand side
   // @param [X_k]: Initial guess for solution X
   // @returns X solution overwritten in X_k
-std::vector<double> Conj_Grad_Method(std::vector<double> &A, std::vector<double> &b, std::vector<double> &X_k)
-  
-
-{
+std::vector<double> Conj_Grad_Method(std::vector<double> &A, std::vector<double> &b, std::vector<double> &X_k){
 
     size_t N = b.size();
-    int k = 0   ;
+    int k = 0;
 
     CBLAS_LAYOUT Layout = CblasRowMajor;
     CBLAS_TRANSPOSE transA = CblasNoTrans;

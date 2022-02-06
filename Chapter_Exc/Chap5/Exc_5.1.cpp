@@ -1,20 +1,20 @@
 #include <iostream>
 #include <vector>
-#include <stdlib.h>
+#include <cstdlib>
 #include <time.h>
+#include <cblas.h>
 
 #include "boost/program_options.hpp"
 namespace po = boost::program_options;
 
 #include "Exc_4.3_funcs.hpp"
 
-
 #define F77NAME(x) x##_
 extern "C" {
 void F77NAME(dgesv)(const int &n, const int &nrhs, double *a,
                     const int &lda, int *ipvt, double* B,
                     const int &ldb, int& info );
-}
+
 void F77NAME(dgemv)(const char &   trans, const int & m, 
                     const int &    n, const double &  alpha,
                     const double * A, const int &     lda,
@@ -22,6 +22,7 @@ void F77NAME(dgemv)(const char &   trans, const int & m,
                     const double & beta, double *     y, 
                     const int &    incy);
 
+}
 
 int main(int argc, char* argv[]){
 
@@ -98,9 +99,15 @@ int main(int argc, char* argv[]){
     const double icx = 1.0;
     const double icy = 1.0;
 
+    CBLAS_LAYOUT Layout = CblasRowMajor;
+    CBLAS_TRANSPOSE transA = CblasTrans;
+    CBLAS_TRANSPOSE transB = CblasNoTrans;
+    CBLAS_SIDE sideA = CblasLeft;
+
     
     // Inputs: ... , ... , ... , Ar ow, Bcols, Acols, 
     // cblas_dgemm(Layout, transA, transB, M, N, K, alpha, &Matr[0], lda,  &Matr[0], lda, 1.0, &C[0], lda); // overwrites C
+    // cblas_dsymm (Layout, sideA, CblasUpper, M, N, alpha, &Matr[0], lda,  &Matr[0], lda, 1.0, &C[0], lda); // overwrites C
     F77NAME(dgemv)('N', N, M, alpha, &Matr[0], lda, &X[0], icx, 0.0, &y[0], icy); // overwrites y
 
     // Initialise X0 guess
@@ -108,7 +115,7 @@ int main(int argc, char* argv[]){
         X[i] = ((double) rand() / (RAND_MAX) - 0.5 )*2;  
     }
 
-    std::vector<double> Errors = Conj_Grad_Method(C, y, X);
+    std::vector<double> Errors = Conj_Grad_Method(Matr, y, X);
 
     if(pm){
         print_matrix(X,1,N);
