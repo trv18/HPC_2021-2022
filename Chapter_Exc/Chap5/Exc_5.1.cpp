@@ -24,6 +24,9 @@ void F77NAME(dgemv)(const char &   trans, const int & m,
 
 }
 
+typedef std::vector<int> ivec;
+typedef std::vector<double> dvec;
+
 int main(int argc, char* argv[]){
 
 // ------------------------------ Command Line Inputs ----------------------------------------
@@ -99,11 +102,9 @@ int main(int argc, char* argv[]){
     const double icx = 1.0;
     const double icy = 1.0;
 
-    CBLAS_LAYOUT Layout = CblasRowMajor;
-    CBLAS_TRANSPOSE transA = CblasTrans;
-    CBLAS_TRANSPOSE transB = CblasNoTrans;
-    CBLAS_SIDE sideA = CblasLeft;
-
+    const int nrhs = 1;
+    int info;
+    ivec ipvt(N);
     
     // Inputs: ... , ... , ... , Ar ow, Bcols, Acols, 
     // cblas_dgemm(Layout, transA, transB, M, N, K, alpha, &Matr[0], lda,  &Matr[0], lda, 1.0, &C[0], lda); // overwrites C
@@ -116,9 +117,11 @@ int main(int argc, char* argv[]){
     }
 
     std::vector<double> Errors = Conj_Grad_Method(Matr, y, X);
+    F77NAME(dgesv)(N,nrhs, &Matr[0], lda,  &ipvt[0], &y[0], lda, info); // Overwrites y
 
     if(pm){
         print_matrix(X,1,N);
+        print_matrix(y,1,N);
     }
 
     if(pm){
