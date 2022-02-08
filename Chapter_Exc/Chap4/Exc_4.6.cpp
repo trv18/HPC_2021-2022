@@ -9,6 +9,7 @@ namespace po = boost::program_options;
 #include <cblas.h>
 
 #include "Exc_4.3_funcs.hpp"
+// #include "General_funcs.hpp"
 
 #define F77NAME(x) x##_
 extern "C" {
@@ -61,7 +62,6 @@ void Generate_A(const int N, const double dx, const double dt, std::vector<doubl
     }
 
 }
-
 
 
 int main(int argc, char* argv[]){
