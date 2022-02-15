@@ -1,4 +1,4 @@
-    #include <cmath>
+#include <cmath>
 
 void populateMatrix(double* M, const int N) {
     for (int j = 0; j < N; j++) {
@@ -17,7 +17,7 @@ void setup(const int N) {
 }
 
 int main() {
-    const int N = 2000;
+    const int N = 2000000;
 
     setup(N);
 

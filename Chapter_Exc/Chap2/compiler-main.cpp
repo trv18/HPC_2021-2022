@@ -18,7 +18,7 @@ int main() {
     int n;
     cin >> n;
 #else   
-    int n = 100000000;
+    int n = 300000000;
 #endif
 
     if (n == 0) {

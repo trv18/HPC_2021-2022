@@ -18,9 +18,10 @@ void print_matrix(std::vector<double> &vec, const int N, const int M){
 }
 
 double f_func(double x){
-    
+
     return sin(M_PI*x);
 }
+
 void generate_f(dvec &f, const int N, const double h){
     for(int i=0; i < N; i++){
         f[i] =  f_func(i*h);
@@ -51,7 +52,7 @@ void generate_b(dvec &b, const int N, const double h){
 }
 
 int main(){
-    const int N =   5;
+    const int N = 5;
     const double h = 0.001;
 
     dvec D;
